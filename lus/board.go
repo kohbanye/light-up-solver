@@ -12,7 +12,7 @@ type Board struct {
 }
 
 func (b *Board) Print() error {
-	fmt.Println("┏", strings.Repeat("━", b.xSize), "┓")
+	fmt.Println("┏" + strings.Repeat("━", b.xSize*2-1) + "┓")
 
 	for _, arr := range b.value {
 		fmt.Print("┃")
@@ -28,7 +28,7 @@ func (b *Board) Print() error {
 		fmt.Println("┃")
 	}
 
-	fmt.Println("┗", strings.Repeat("━", b.xSize), "┛")
+	fmt.Println("┗" + strings.Repeat("━", b.xSize*2-1) + "┛")
 
 	return nil
 }
