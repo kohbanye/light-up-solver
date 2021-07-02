@@ -8,7 +8,7 @@ import (
 type Board struct {
 	xSize int
 	ySize int
-	value [][]Block
+	value [][]Cell
 }
 
 func (b *Board) Print() error {

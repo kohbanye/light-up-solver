@@ -5,16 +5,16 @@ import (
 	"fmt"
 )
 
-type Block struct {
+type Cell struct {
 	value int
 	canPut bool
 }
 
-func (b *Block) Print() error {
-	switch b.value {
+func (c *Cell) Print() error {
+	switch c.value {
 	case 0, 1, 2, 3, 4:
 		// a block with number
-		fmt.Print(b.value)
+		fmt.Print(c.value)
 	case 5:
 		// just a block
 		fmt.Print("#")

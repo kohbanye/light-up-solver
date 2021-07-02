@@ -6,7 +6,7 @@ var sample = Board{
 	xSize: 10,
 	ySize: 10,
 	// source: https://www.nikoli.co.jp/ja/app/bj_tutorial/
-	value: [][]Block{
+	value: [][]Cell{
 		{{6, true}, {1, false}, {6, true}, {6, true}, {5, false}, {6, true}},
 		{{6, true}, {5, false}, {6, true}, {6, true}, {6, true}, {6, true}},
 		{{6, true}, {6, true}, {6, true}, {2, false}, {6, true}, {5, false}},
