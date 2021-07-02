@@ -1,23 +1,29 @@
 package lus
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-var sample = Board{
-	xSize: 10,
-	ySize: 10,
+func genTestCase() *Board {
 	// source: https://www.nikoli.co.jp/ja/app/bj_tutorial/
-	value: [][]Cell{
-		{{6, true}, {1, false}, {6, true}, {6, true}, {5, false}, {6, true}},
-		{{6, true}, {5, false}, {6, true}, {6, true}, {6, true}, {6, true}},
-		{{6, true}, {6, true}, {6, true}, {2, false}, {6, true}, {5, false}},
-		{{5, false}, {6, true}, {4, false}, {6, true}, {6, true}, {6, true}},
-		{{6, true}, {6, true}, {6, true}, {6, true}, {0, false}, {6, true}},
-		{{6, true}, {5, false}, {6, true}, {6, true}, {5, true}, {6, true}},
-	},
+	s := [][]int{
+		{6, 1, 6, 6, 5, 6},
+		{6, 5, 6, 6, 6, 6},
+		{6, 6, 6, 2, 6, 5},
+		{5, 6, 4, 6, 6, 6},
+		{6, 6, 6, 6, 0, 6},
+		{6, 5, 6, 6, 5, 6},
+	}
+
+	b, _ := NewBoard(s)
+	return b
 }
 
 func TestPrint(t *testing.T) {
-	err := sample.Print()
+	b := genTestCase()
+	fmt.Printf("x: %d, y: %d\n", b.xSize, b.ySize)
+	err := b.Print()
 	if err != nil {
 		t.Errorf("Print failed: %w", err)
 	}
