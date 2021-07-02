@@ -17,8 +17,9 @@ const (
 )
 
 type Cell struct {
-	value int
-	canPut bool
+	value    int
+	canPut   bool
+	isBright bool
 }
 
 func (c *Cell) Print() error {

@@ -24,9 +24,9 @@ func NewBoard(v [][]int) (*Board, error) {
 		for _, x := range arr {
 			switch x {
 			case Block, Block0, Block1, Block2, Block3, Block4, Light:
-				s = append(s, Cell{x, false})
+				s = append(s, Cell{x, false, false})
 			case Space:
-				s = append(s, Cell{x, true})
+				s = append(s, Cell{x, true, false})
 			default:
 				return nil, errors.New("invalid number of a cell")
 			}
