@@ -1,6 +1,35 @@
 package lus
 
-import "errors"
+import (
+	"errors"
+)
+
+func Solve(b Board) (bool, Board) {
+	if b.IsCorrect() {
+		return true, b
+	} else {
+		for i := 0; i < b.ySize; i++ {
+			for j := 0; j < b.xSize; j++ {
+				c := b.value[i][j]
+				if c.value == Space && c.canPut {
+					b_ := b
+					b.SetLight(i, j)
+
+					if bl, ans := Solve(b); bl {
+						return true, ans
+					}
+
+					b = b_
+					b.value[i][j].canPut = false
+					if bl, ans := Solve(b); bl {
+						return true, ans
+					}
+				}
+			}
+		}
+		return false, b
+	}
+}
 
 func (b *Board) IsCorrect() bool {
 	for i := 0; i < b.ySize; i++ {
@@ -32,7 +61,6 @@ func (b *Board) SetLight(row int, col int) error {
 		}
 		b.value[row][col-i].canPut = false
 		b.value[row][col-i].isBright = true
-			update = true
 	}
 	// light the under side
 	for i := 1; ; i++ {
@@ -41,7 +69,6 @@ func (b *Board) SetLight(row int, col int) error {
 		}
 		b.value[row][col+i].canPut = false
 		b.value[row][col+i].isBright = true
-			update = true
 	}
 	// light the left side
 	for i := 1; ; i++ {
@@ -50,7 +77,6 @@ func (b *Board) SetLight(row int, col int) error {
 		}
 		b.value[row-i][col].canPut = false
 		b.value[row-i][col].isBright = true
-			update = true
 	}
 	// light the right side
 	for i := 1; ; i++ {
@@ -59,7 +85,6 @@ func (b *Board) SetLight(row int, col int) error {
 		}
 		b.value[row+i][col].canPut = false
 		b.value[row+i][col].isBright = true
-			update = true
 	}
 
 	return nil
