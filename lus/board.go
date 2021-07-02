@@ -19,19 +19,27 @@ func NewBoard(v [][]int) (*Board, error) {
 	b.ySize = len(v)
 
 	b.value = [][]Cell{}
-	for _, arr := range v {
+	var lights [][2]int
+	for i, arr := range v {
 		var s []Cell
-		for _, x := range arr {
+		for j, x := range arr {
 			switch x {
-			case Block, Block0, Block1, Block2, Block3, Block4, Light:
+			case Block, Block0, Block1, Block2, Block3, Block4:
 				s = append(s, Cell{x, false, false})
 			case Space:
 				s = append(s, Cell{x, true, false})
+			case Light:
+				s = append(s, Cell{x, true, false})
+				lights = append(lights, [2]int{i, j})
 			default:
 				return nil, errors.New("invalid number of a cell")
 			}
 		}
 		b.value = append(b.value, s)
+	}
+
+	for _, coord := range lights {
+		b.SetLight(coord[0], coord[1])
 	}
 
 	return b, nil
