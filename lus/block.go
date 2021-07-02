@@ -5,6 +5,17 @@ import (
 	"fmt"
 )
 
+const (
+	Block0 = iota
+	Block1
+	Block2
+	Block3
+	Block4
+	Block
+	Space
+	Light
+)
+
 type Cell struct {
 	value int
 	canPut bool
@@ -12,17 +23,13 @@ type Cell struct {
 
 func (c *Cell) Print() error {
 	switch c.value {
-	case 0, 1, 2, 3, 4:
-		// a block with number
+	case Block0, Block1, Block2, Block3, Block4:
 		fmt.Print(c.value)
-	case 5:
-		// just a block
+	case Block:
 		fmt.Print("#")
-	case 6:
-		// space
+	case Space:
 		fmt.Print(" ")
-	case 7:
-		// light
+	case Light:
 		fmt.Print("*")
 	default:
 		return errors.New("invalid number of a block")
