@@ -24,3 +24,18 @@ func TestIsCorrect(t *testing.T) {
 		t.Errorf("correct board was determined to be wrong")
 	}
 }
+
+func TestSetLight(t *testing.T) {
+	b := genSampleBoard()
+
+	b.SetLight(4, 2)
+	b.Print()
+
+	for i := 0; i < b.ySize; i++ {
+		for j := 0; j < b.xSize; j++ {
+			if b.value[i][j].isBright {
+				fmt.Printf("(%d, %d) is lit\n", i, j)
+			}
+		}
+	}
+}
