@@ -32,7 +32,6 @@ func (b *Board) SetLight(row int, col int) error {
 		}
 		b.value[row][col-i].canPut = false
 		b.value[row][col-i].isBright = true
-			update = true
 	}
 	// light the under side
 	for i := 1; ; i++ {
@@ -41,7 +40,6 @@ func (b *Board) SetLight(row int, col int) error {
 		}
 		b.value[row][col+i].canPut = false
 		b.value[row][col+i].isBright = true
-			update = true
 	}
 	// light the left side
 	for i := 1; ; i++ {
@@ -50,7 +48,6 @@ func (b *Board) SetLight(row int, col int) error {
 		}
 		b.value[row-i][col].canPut = false
 		b.value[row-i][col].isBright = true
-			update = true
 	}
 	// light the right side
 	for i := 1; ; i++ {
@@ -59,7 +56,6 @@ func (b *Board) SetLight(row int, col int) error {
 		}
 		b.value[row+i][col].canPut = false
 		b.value[row+i][col].isBright = true
-			update = true
 	}
 
 	return nil
