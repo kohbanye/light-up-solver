@@ -6,7 +6,8 @@ import (
 )
 
 func TestSolve(t *testing.T) {
-	b := genSampleBoard()
+	// b := genSampleBoard()
+	b := genDifficultBoard()
 
 	bl, ans := Solve(*b)
 	if bl {
