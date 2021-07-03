@@ -12,7 +12,7 @@ func TestSolve(t *testing.T) {
 	if bl {
 		ans.Print()
 	} else {
-		fmt.Println("couldn't solve")
+		t.Error("couldn't solve")
 	}
 }
 
