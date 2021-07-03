@@ -29,7 +29,7 @@ func NewBoard(v [][]int) (*Board, error) {
 			case Space:
 				s = append(s, Cell{v[i][j], true, false})
 			case Light:
-				s = append(s, Cell{v[i][j], true, false})
+				s = append(s, Cell{Space, true, false})
 				lights = append(lights, [2]int{i, j})
 			default:
 				return nil, errors.New("invalid number of a cell")
