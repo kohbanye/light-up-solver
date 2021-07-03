@@ -33,7 +33,7 @@ func (c *Cell) Print() error {
 	case Light:
 		fmt.Print("*")
 	default:
-		return errors.New("invalid number of a block")
+		return errors.New("invalid number of a cell")
 	}
 	return nil
 }
