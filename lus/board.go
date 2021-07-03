@@ -23,13 +23,13 @@ func NewBoard(v [][]int) (*Board, error) {
 	for i := 0; i < b.ySize; i++ {
 		var s []Cell
 		for j := 0; j < b.xSize; j++ {
-			switch c := b.value[i][j]; c.value {
+			switch v[i][j] {
 			case Block, Block0, Block1, Block2, Block3, Block4:
-				s = append(s, Cell{c.value, false, false})
+				s = append(s, Cell{v[i][j], false, false})
 			case Space:
-				s = append(s, Cell{c.value, true, false})
+				s = append(s, Cell{v[i][j], true, false})
 			case Light:
-				s = append(s, Cell{c.value, true, false})
+				s = append(s, Cell{v[i][j], true, false})
 				lights = append(lights, [2]int{i, j})
 			default:
 				return nil, errors.New("invalid number of a cell")
