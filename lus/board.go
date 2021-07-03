@@ -63,6 +63,16 @@ func (b *Board) Print() error {
 	}
 
 	fmt.Println("┗" + strings.Repeat("━", b.xSize*2-1) + "┛")
-
 	return nil
+}
+
+// CopyBoard copies elements from a source Board and returns a copied Board.
+func CopyBoard(src Board) Board {
+	dst := Board{src.xSize, src.ySize, make([][]Cell, len(src.value))}
+	for i := range src.value {
+		dst.value[i] = make([]Cell, len(src.value[i]))
+		copy(dst.value[i], src.value[i])
+	}
+
+	return dst
 }
