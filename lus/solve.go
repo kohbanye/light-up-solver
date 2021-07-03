@@ -10,20 +10,20 @@ func Solve(b Board) (bool, Board) {
 	} else {
 		for i := 0; i < b.ySize; i++ {
 			for j := 0; j < b.xSize; j++ {
-				c := b.value[i][j]
-				if c.canPut {
-					b_ := b
+				if b.value[i][j].canPut {
+					b_ := CopyBoard(b)
 					b.SetLight(i, j)
-
 					if bl, ans := Solve(b); bl {
 						return true, ans
 					}
 
-					b = b_
+					b = CopyBoard(b_)
 					b.value[i][j].canPut = false
 					if bl, ans := Solve(b); bl {
 						return true, ans
 					}
+
+					return false, b
 				}
 			}
 		}
