@@ -8,12 +8,12 @@ import (
 func genSampleBoard() *Board {
 	// source: https://www.nikoli.co.jp/ja/app/bj_tutorial/
 	s := [][]int{
-		{6, 1, 6, 6, 5, 6},
-		{6, 5, 6, 6, 6, 6},
-		{6, 6, 6, 2, 6, 5},
-		{5, 6, 4, 6, 6, 6},
-		{6, 6, 6, 6, 0, 6},
-		{6, 5, 6, 6, 5, 6},
+		{Space, Block1, Space, Space, Block, Space},
+		{Space, Block, Space, Space, Space, Space},
+		{Space, Space, Space, Block2, Space, Block},
+		{Block, Space, Block4, Space, Space, Space},
+		{Space, Space, Space, Space, Block0, Space},
+		{Space, Block, Space, Space, Block, Space},
 	}
 
 	b, _ := NewBoard(s)
