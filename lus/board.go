@@ -76,3 +76,43 @@ func CopyBoard(src Board) Board {
 
 	return dst
 }
+
+type boolFunc func(c Cell) bool
+
+func (b *Board) CountAroundCell(i, j int, f boolFunc) int {
+	cnt := 0
+	diff := [4][2]int{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}
+	for _, d := range diff {
+		if 0 <= i+d[0] && i+d[0] < b.ySize && 0 <= j+d[1] && j+d[1] < b.xSize &&
+			f(b.value[i+d[0]][j+d[1]]) {
+			cnt++
+		}
+	}
+
+	return cnt
+}
+
+func (b *Board) SpaceAroundCell(i, j int) [][2]int {
+	var s [][2]int
+	diff := [4][2]int{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}
+	for _, d := range diff {
+		if 0 <= i+d[0] && i+d[0] < b.ySize && 0 <= j+d[1] && j+d[1] < b.xSize &&
+			b.value[i+d[0]][j+d[1]].value == Space {
+			s = append(s, [2]int{i + d[0], j + d[1]})
+		}
+	}
+
+	return s
+}
+
+func (b *Board) ForbidAroundCell(i, j int) {
+	for _, coord := range b.SpaceAroundCell(i, j) {
+		b.value[coord[0]][coord[1]].canPut = false
+	}
+}
+
+func (b *Board) LightAroundCell(i, j int) {
+	for _, coord := range b.SpaceAroundCell(i, j) {
+		b.SetLight(coord[0], coord[1])
+	}
+}

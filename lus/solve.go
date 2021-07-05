@@ -31,6 +31,26 @@ func Solve(b Board) (bool, Board) {
 	}
 }
 
+func (b *Board) SolveInit() {
+	for i := 0; i < b.ySize; i++ {
+		for j := 0; j < b.xSize; j++ {
+			switch c := b.value[i][j]; c.value {
+			case Block0:
+				b.ForbidAroundCell(i, j)
+			case Block4:
+				b.LightAroundCell(i, j)
+			default:
+				if c.isNumberBlock() {
+					puttable := b.CountAroundCell(i, j, func(c Cell) bool { return c.canPut })
+					if puttable == c.value {
+						b.LightAroundCell(i, j)
+					}
+				}
+			}
+		}
+	}
+}
+
 func (b *Board) SetLight(row int, col int) error {
 	c := &b.value[row][col]
 	if c.value != Space {
