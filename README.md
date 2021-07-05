@@ -1,2 +1,2 @@
 # light-up-solver
-Solver for Light Up puzzle.
+Solver for puzzle "Light Up".
