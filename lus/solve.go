@@ -5,7 +5,11 @@ import (
 )
 
 func Solve(b Board) (bool, Board) {
-	if b.IsCorrect() {
+	b.SatisfyConstraint()
+
+	if b.IsWrong() {
+		return false, b
+	} else if b.IsCorrect() {
 		return true, b
 	} else {
 		for i := 0; i < b.ySize; i++ {
@@ -31,20 +35,19 @@ func Solve(b Board) (bool, Board) {
 	}
 }
 
-func (b *Board) SolveInit() {
+func (b *Board) SatisfyConstraint() {
 	for i := 0; i < b.ySize; i++ {
 		for j := 0; j < b.xSize; j++ {
-			switch c := b.value[i][j]; c.value {
-			case Block0:
-				b.ForbidAroundCell(i, j)
-			case Block4:
-				b.LightAroundCell(i, j)
-			default:
-				if c.isNumberBlock() {
-					puttable := b.CountAroundCell(i, j, func(c Cell) bool { return c.canPut })
-					if puttable == c.value {
-						b.LightAroundCell(i, j)
-					}
+			c := b.value[i][j]
+			light := b.CountAroundCell(i, j, func(c Cell) bool { return c.value == Light })
+			puttable := b.CountAroundCell(i, j, func(c Cell) bool { return c.canPut })
+			if c.isNumberBlock() {
+				if light == c.value {
+					// if number of lights around the number cell is enough, make unable to put lights around it
+					b.ForbidAroundCell(i, j)
+				} else if light+puttable == c.value {
+					// if lights have to be put to satisfy the number cell, put lights
+					b.LightAroundCell(i, j)
 				}
 			}
 		}

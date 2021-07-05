@@ -31,6 +31,21 @@ func (b *Board) IsCorrect() bool {
 	return true
 }
 
+func (b *Board) IsWrong() bool {
+	for i := 0; i < b.ySize; i++ {
+		for j := 0; j < b.xSize; j++ {
+			c := b.value[i][j]
+			light := b.CountAroundCell(i, j, func(c Cell) bool { return c.value == Light })
+
+			if light > c.value {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
 func (c *Cell) isBlock() bool {
 	switch c.value {
 	case Block, Block0, Block1, Block2, Block3, Block4:

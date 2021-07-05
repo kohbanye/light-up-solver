@@ -9,7 +9,6 @@ func TestSolve(t *testing.T) {
 	// b := genSampleBoard()
 	b := genDifficultBoard()
 
-	b.SolveInit()
 	bl, ans := Solve(*b)
 	if bl {
 		ans.Print()
